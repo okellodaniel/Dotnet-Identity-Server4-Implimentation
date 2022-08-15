@@ -24,22 +24,54 @@ public class IssuesController : ControllerBase
     [HttpGet("id")]
     [ProducesResponseType(typeof(Issue),StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Issue),StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetByIdAsync(Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         var issue = await _context.Issues.FindAsync(id);
         return issue == null ? NotFound() : Ok();
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(Issue),StatusCodes.Status202Accepted)]
     public async Task<IActionResult> CreateIssue(Issue issue)
     {
         await _context.Issues.AddAsync(issue);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetByIdAsync), new
+        return CreatedAtAction(nameof(GetById), new
         {
             id = issue.Id
         }, issue);
     }
 
+    [HttpPut("{id}")]
+    [ProducesResponseType(typeof(Issue), StatusCodes.Status202Accepted)]
+    [ProducesResponseType(typeof(Issue), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateAsync(Guid id, Issue issue)
+    {
+        await _context.Issues.FindAsync(id);
+
+        if (id != issue.Id) return BadRequest();
+        
+        _context.Entry(issue).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return NoContent();        
+    }
+    
+    [HttpPut("{id}")]
+    [ProducesResponseType(typeof(Issue), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(Issue), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var issue = await _context.Issues.FindAsync(id);
+        if (issue == null)
+        {
+            return NotFound();
+        }
+
+        _context.Issues.Remove(issue);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }
