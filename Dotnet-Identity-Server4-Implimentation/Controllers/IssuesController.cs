@@ -20,7 +20,7 @@ public class IssuesController : ControllerBase
        => await _context.Issues.ToListAsync();
 
     [HttpGet("id")]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    public async Task<IActionResult> GetByIdAsync(Guid id)
     {
         var issue = await _context.Issues.FindAsync(id);
         return issue == null ? NotFound() : Ok();
