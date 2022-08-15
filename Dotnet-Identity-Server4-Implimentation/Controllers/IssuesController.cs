@@ -16,8 +16,15 @@ public class IssuesController : ControllerBase
    =>   _context = context;
 
     [HttpGet]
-    []
-   public async Task<IEnumerable<Issue>> Get()
+    public async Task<IEnumerable<Issue>> Get()
        => await _context.Issues.ToListAsync();
-   
+
+    [HttpGet("id")]
+    public async Task<IActionResult> GetByIdAsync(int id)
+    {
+        var issue = await _context.Issues.FindAsync(id);
+        return issue == null ? NotFound() : Ok();
+    }
+    
+
 }
