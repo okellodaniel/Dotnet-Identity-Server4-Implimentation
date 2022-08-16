@@ -13,7 +13,6 @@ public class Issue
     public IssueType IssueType { get; set; }
     public DateTime Created { get; set; }
     public DateTime? Completed { get; set; }
-
 }
 
 public enum Priority

@@ -4,21 +4,31 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace IdentityServer
 {
     public class Startup
     {
+        private readonly ILogger<Startup> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _loggerFactory;
         public IWebHostEnvironment Environment { get; }
 
-        public Startup(IWebHostEnvironment environment)
+        public Startup(IWebHostEnvironment environment,ILogger<Startup> logger, IConfiguration configuration, ILoggerFactory loggerFactory)
         {
+            _logger = logger;
+            _configuration = configuration;
+            _loggerFactory = loggerFactory;
             Environment = environment;
+            
+            _logger.LogInformation("=====>Identity-server API started<=====");
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services) 
         {
             // uncomment, if you want to add an MVC-based UI
             //services.AddControllersWithViews();

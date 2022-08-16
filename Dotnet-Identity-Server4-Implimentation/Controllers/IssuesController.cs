@@ -1,5 +1,6 @@
 ﻿using Dotnet_Identity_Server4_Implimentation.Data;
 using Dotnet_Identity_Server4_Implimentation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace Dotnet_Identity_Server4_Implimentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class IssuesController : ControllerBase
 {
    private readonly IssueDbContext _context;
@@ -73,5 +75,16 @@ public class IssuesController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    [HttpGet("/identity")]
+    public IActionResult GetIdentity()
+    {
+        return  new JsonResult(from c in User.Claims
+            select new
+            {
+                c.Type,
+                c.Value
+            });
     }
 }

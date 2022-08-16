@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet-Identity-Server4-Imp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{BC0C82C9-6C98-4909-A719-A6DACECD4D95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsoleApp", "ClientConsoleApp\ClientConsoleApp.csproj", "{15235933-A28F-4039-B59B-896F38B8B99E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{BC0C82C9-6C98-4909-A719-A6DACECD4D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC0C82C9-6C98-4909-A719-A6DACECD4D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC0C82C9-6C98-4909-A719-A6DACECD4D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15235933-A28F-4039-B59B-896F38B8B99E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15235933-A28F-4039-B59B-896F38B8B99E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15235933-A28F-4039-B59B-896F38B8B99E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15235933-A28F-4039-B59B-896F38B8B99E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
